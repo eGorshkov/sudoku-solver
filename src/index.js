@@ -1,10 +1,17 @@
-window.onload = () => {
-  const form = document.getElementById('sudoku-radio-form');
-  const inputs = form.querySelectorAll('input');
-  inputs.forEach(radio => radio.addEventListener('change', setMode));
-  console.log(form, inputs);
+import * as mode from './services/sudoku.js';
+const sudokuPuzzle = [
+  [5, 3, 0, 0, 7, 0, 0, 0, 0],
+  [6, 0, 0, 1, 9, 5, 0, 0, 0],
+  [0, 9, 8, 0, 0, 0, 0, 6, 0],
+  [8, 0, 0, 0, 6, 0, 0, 0, 3],
+  [4, 0, 0, 8, 0, 3, 0, 0, 1],
+  [7, 0, 0, 0, 2, 0, 0, 0, 6],
+  [0, 6, 0, 0, 0, 0, 2, 8, 0],
+  [0, 0, 0, 4, 1, 9, 0, 0, 5],
+  [0, 0, 0, 0, 8, 0, 0, 7, 9]
+];
 
-  function setMode(event) {
-    console.log('---', 'setMode', event);
-  }
+window.onload = () => {
+  const table = document.getElementById('sudoku-table');
+  mode.create(table, sudokuPuzzle);
 };

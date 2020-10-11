@@ -3,23 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <script type="module" charset="UTF-8" src="./index.js"></script>
     <title>Sudoku</title>
 </head>
 <body>
-    <form id="sudoku-radio-form">
-        <input type="radio" name="sudoku" value="easy" id="easy-sudoku" checked>
-        <label for="easy-sudoku">Easy</label>
-
-        <input type="radio" name="sudoku" value="sudoku" id="hard-sudoku">
-        <label for="hard-sudoku">Hard</label>
-    </form>
-
-    <table style="width: 100%; text-align: center;">
-        <tbody id="sudoku">
-            
-        </tbody>
-    </table>
-
-    <script type="text/javascript" charset="UTF-8" src="./index.js"></script>
+    <main class="sudoku__container">
+        <table class="sudoku__table">
+            <tbody id='sudoku-table'></tbody>
+        </table>
+    </main>
 </body>
 </html>
