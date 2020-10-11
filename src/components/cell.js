@@ -1,11 +1,12 @@
 import { compose } from '../helpers/compose.js';
+import { COLUMN_INDEX } from '../helpers/constans.js';
 
 const MAX_VALUE = 9;
 const MIN_VALUE = 1;
 
 export function createCell([columnValue, columnIndex, validationFn]) {
   const td = document.createElement('td');
-  td.setAttribute('column', columnIndex);
+  td.setAttribute(COLUMN_INDEX, columnIndex);
   td.appendChild(createInput(columnValue, validationFn));
   return td;
 }
@@ -19,7 +20,9 @@ function createInput(value, validationFn) {
         input.min = MIN_VALUE;
 
         input.addEventListener('input', compose(validationFn, validate));
-            return input;
+        input.addEventListener('focus', compose(validationFn, validate));
+        input.addEventListener('blur', compose(validationFn, validate));
+        return input;
     }
 
 function validate(e) {
