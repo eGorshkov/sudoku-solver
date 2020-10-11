@@ -26,6 +26,7 @@ function createInput(value, validationFn) {
     }
 
 function validate(e) {
+        console.log(e);
         const current = e.target.valueAsNumber || '';
         e.target.value = current > MAX_VALUE ? MAX_VALUE : current < MIN_VALUE ? '' : current;
         return e;
