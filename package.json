@@ -6,7 +6,7 @@
     "license": "ISC",
     "scripts": {
         "start": "nodemon ./server.js",
-        "apply": "prettier -w ."
+        "apply": "prettier --write ."
     },
     "devDependencies": {
         "husky": "^4.3.0",
@@ -21,7 +21,7 @@
     },
     "lint-staged": {
         "*.{js,json,css,scss,less,md,ts,html,component.html}": [
-            "prettier -w .",
+            "prettier --write",
             "git add"
         ]
     }

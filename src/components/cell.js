@@ -12,7 +12,7 @@ export function createCell([columnValue, columnIndex, validationFn]) {
 }
 
 function createInput(value, validationFn) {
-        const input = document.createElement('input');
+ const input = document.createElement('input');
         input.type = 'number';
         input.value = value || '';
         input.disabled = !!value;
