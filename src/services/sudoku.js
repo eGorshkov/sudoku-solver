@@ -9,8 +9,8 @@ import { createTable } from '../components/table.js';
  */
 export function create(tableElement, puzzle) {
   createTable(tableElement, puzzle, {
-    input: validate(puzzle, tableElement, setValue),
-    focus: validate(puzzle, tableElement, setValue),
+    input: validate(puzzle, tableElement, setValue(puzzle)),
+    focus: validate(puzzle, tableElement, setValue(puzzle)),
     blur: removeValidation.bind(null, tableElement)
   });
 }
