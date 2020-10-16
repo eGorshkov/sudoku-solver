@@ -8,19 +8,15 @@ import { createTable } from '../components/table.js';
  * @param {number[][]} puzzle
  */
 export function create(tableElement, puzzle) {
-  createTable(
-    tableElement,
-    puzzle,
-    {
-      input: validate(puzzle, tableElement, setValue),
-      focus: validate(puzzle, tableElement, setValue),
-      blur: removeValidation.bind(null, tableElement),
-    }
-  );
-};
+  createTable(tableElement, puzzle, {
+    input: validate(puzzle, tableElement, setValue),
+    focus: validate(puzzle, tableElement, setValue),
+    blur: removeValidation.bind(null, tableElement)
+  });
+}
 
 function setValue(puzzle) {
-  return (lineIndex, columnIndex, value) => puzzle[lineIndex][columnIndex] = value;
+  return (lineIndex, columnIndex, value) => (puzzle[lineIndex][columnIndex] = value);
 }
 
 export function solve(puzzle) {
@@ -33,19 +29,19 @@ export function solve(puzzle) {
   return puzzle.some(line => line.includes(0)) ? solve(puzzle) : puzzle;
 }
 
-  /**
-   * Получить наиболее вероятное число
-   * @param {number[][]} puzzle
-   * @param {number} lineIndex
-   * @param {number} columnIndex
-   */
-  function solveColumnValue(puzzle, lineIndex, columnIndex) {
-    const probableValues = helper.getProbableValues(puzzle, lineIndex, columnIndex);
+/**
+ * Получить наиболее вероятное число
+ * @param {number[][]} puzzle
+ * @param {number} lineIndex
+ * @param {number} columnIndex
+ */
+function solveColumnValue(puzzle, lineIndex, columnIndex) {
+  const probableValues = helper.getProbableValues(puzzle, lineIndex, columnIndex);
 
-    if (!probableValues.length) {
-      console.error('has not probableValues', puzzle);
-      return 0;
-    }
-
-    return probableValues.length > 1 ? 0 : probableValues[0];
+  if (!probableValues.length) {
+    console.error('has not probableValues', puzzle);
+    return 0;
   }
+
+  return probableValues.length > 1 ? 0 : probableValues[0];
+}

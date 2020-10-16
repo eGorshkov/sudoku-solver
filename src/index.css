@@ -1,69 +1,69 @@
 :root {
-    --section-color: coral;
-    --invalid-color: tomato;
-    --disabled-color: lightgrey;
-    --focus-color: aqua;
+  --section-color: coral;
+  --invalid-color: tomato;
+  --disabled-color: lightgrey;
+  --focus-color: aqua;
 }
 
 body {
-    width: 100vw;
-    height: 100vh;
-    margin: 0;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
 }
 
 .sudoku__container {
-    height: inherit;
-    width: inherit;
-    display: grid;
-    place-content: center;
-    background-color: ghostwhite;
+  height: inherit;
+  width: inherit;
+  display: grid;
+  place-content: center;
+  background-color: ghostwhite;
 }
 
 .sudoku__table {
-    width: inherit;
-     text-align: center;
-     border-collapse: collapse;
-     max-width: 800px;
+  width: inherit;
+  text-align: center;
+  border-collapse: collapse;
+  max-width: 800px;
 }
 
 .sudoku__table > tbody > tr > td {
-    height: 50px;
-    border: 1px solid;
-    padding: 0;
+  height: 50px;
+  border: 1px solid;
+  padding: 0;
 }
 
 .sudoku__table tr:first-child > td {
-    border-top: 3px solid var(--section-color, red);
+  border-top: 3px solid var(--section-color, red);
 }
 .sudoku__table tr:nth-child(3n) > td {
-    border-bottom: 3px solid var(--section-color, red);
+  border-bottom: 3px solid var(--section-color, red);
 }
 
 .sudoku__table tr > td:nth-child(3n) {
-    border-right: 3px solid var(--section-color, red);
+  border-right: 3px solid var(--section-color, red);
 }
 
 .sudoku__table tr > td:first-child {
-    border-left: 3px solid var(--section-color, red);
+  border-left: 3px solid var(--section-color, red);
 }
 
 .sudoku__table > tbody > tr > td > input {
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    border: none;
-    background-color: transparent;
-    padding: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  border: none;
+  background-color: transparent;
+  padding: 0;
 }
 
 .sudoku__table > tbody > tr > td > input:disabled {
-    background-color: var(--disabled-color, grey);
+  background-color: var(--disabled-color, grey);
 }
 
 .sudoku__table tr[invalid] > td:not([invalid]) > input {
-    background-color: hsla(9, 100%, 64%, .5);
+  background-color: hsla(9, 100%, 64%, 0.5);
 }
 
 .sudoku__table td[invalid] {
-    background-color: var(--invalid-color, red);
+  background-color: var(--invalid-color, red);
 }
