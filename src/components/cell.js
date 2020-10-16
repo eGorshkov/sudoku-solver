@@ -5,7 +5,7 @@ import { createInput } from './input.js';
  *
  * @param {number} columnValue
  * @param {number} columnIndex
- * @param {{input: Function, blur: Function, focus: Function}} callbackFn
+ * @param {IInputCallback} callbackFn
  */
 export function createCell(columnValue, columnIndex, callbackFn) {
   const td = document.createElement('td');

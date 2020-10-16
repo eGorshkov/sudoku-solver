@@ -7,7 +7,7 @@ import { createCell } from './cell.js';
  *
  * @param {number[]} line
  * @param {number} lineIndex
- * @param {{input: Function, blur: Function, focus: Function}} callbackFn
+ * @param {IInputCallback} callbackFn
  */
 export function createRow(line, lineIndex, callbackFn) {
   const tr = document.createElement('tr'),
