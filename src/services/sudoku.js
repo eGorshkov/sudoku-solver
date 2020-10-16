@@ -1,6 +1,10 @@
 import * as helper from '../helpers/index.js';
 import { removeValidation, validate } from './validation.js';
 import { createTable } from '../components/table.js';
+import { Subject } from '../helpers/custom-subject.js';
+
+export const _focusedChange = new Subject(false);
+export const _textChange = new Subject('initial');
 
 /**
  *
@@ -10,8 +14,16 @@ import { createTable } from '../components/table.js';
 export function create(tableElement, puzzle) {
   createTable(tableElement, puzzle, {
     input: validate(puzzle, tableElement, setValue(puzzle)),
-    focus: validate(puzzle, tableElement, setValue(puzzle)),
-    blur: removeValidation.bind(null, tableElement)
+    focus: validate(puzzle, tableElement, [
+      setValue(puzzle),
+      _focusedChange.bind(true),
+      _textChange.bind( 'focused')
+    ]),
+    blur: [
+      removeValidation.bind(null, tableElement),
+      _focusedChange.bind( false),
+      _textChange.bind( 'blured')
+    ]
   });
 }
 

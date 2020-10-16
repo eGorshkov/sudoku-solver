@@ -13,8 +13,13 @@ export function createInput(value, callbackFn) {
   input.max = MAX_SUDOKU_VALUE;
   input.min = MIN_SUDOKU_VALUE;
 
-  input.addEventListener('input', callbackFn.input);
-  input.addEventListener('focus', callbackFn.focus);
-  input.addEventListener('blur', callbackFn.blur);
+  if (callbackFn) {
+    Object.keys(callbackFn).forEach(type => {
+      Array.isArray(callbackFn[type])
+        ? callbackFn[type].forEach(cb => input.addEventListener(type, cb))
+        : input.addEventListener(type, callbackFn[type])
+    })
+  }
+
   return input;
 }

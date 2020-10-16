@@ -27,7 +27,8 @@ export function validate(puzzle, table, callbackFn) {
     );
     validateRow(line);
 
-    callbackFn(lineIndex, columnIndex, e.target.valueAsNumber || 0);
+    callbackFn = Array.isArray(callbackFn) ? callbackFn : [callbackFn];
+    callbackFn.forEach(fn => fn(lineIndex, columnIndex, e.target.valueAsNumber || 0));
     // validateColumn(tbody, column.getAttribute(COLUMN_INDEX));
   };
 }
