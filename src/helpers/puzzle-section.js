@@ -1,9 +1,4 @@
-/**
- * Делитель судоку на секции
- * @type {number}
- * @readonly
- */
-const SUDOKU_SECTION_DIVIDER = 3;
+import { SUDOKU_SECTION_DIVIDER } from './constans.js';
 
 /**
  * Получение секции

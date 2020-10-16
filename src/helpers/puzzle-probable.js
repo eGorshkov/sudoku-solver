@@ -1,8 +1,9 @@
 import { getColumn } from './puzzle-column.js';
 import { getPuzzleSection } from './puzzle-section.js';
+import { SUDOKU_VALUES } from './constans.js';
 
 export function getProbableValues(puzzle, lineIndex, columnIndex) {
-  return helper.constans.SUDOKU_VALUES.filter(probable(getAllValues(puzzle, lineIndex, columnIndex)));
+  return SUDOKU_VALUES.filter(probable(getAllValues(puzzle, lineIndex, columnIndex)));
 }
 
 /**
