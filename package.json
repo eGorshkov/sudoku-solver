@@ -9,10 +9,11 @@
         "apply": "prettier --write ."
     },
     "devDependencies": {
+        "express": "^4.17.1",
         "husky": "^4.3.0",
-        "prettier": "^2.1.2",
         "lint-staged": "10.2.13",
-        "nodemon": "2.0.4"
+        "nodemon": "2.0.4",
+        "prettier": "^2.1.2"
     },
     "husky": {
         "hooks": {

@@ -1,4 +1,4 @@
-import { COLUMN_INDEX, LINE_INDEX } from '../helpers/constans.js';
+import { COLUMN_INDEX, LINE_INDEX, MAX_SUDOKU_VALUE, MIN_SUDOKU_VALUE } from '../helpers/constans.js';
 import { getColumn } from '../helpers/index.js';
 import { getPuzzleSection } from '../helpers/puzzle-section.js';
 
@@ -10,29 +10,41 @@ import { getPuzzleSection } from '../helpers/puzzle-section.js';
 export function validate(puzzle, table, callbackFn) {
     return (e) => {
 
-        const column = e.target.parentElement,
-              columnIndex = +column.getAttribute(COLUMN_INDEX),
-              line = column.parentElement,
-              lineIndex = +line.getAttribute(LINE_INDEX),
-              tbody = line.parentElement;
-
-        if(e.type === 'focus') {
-            Array.from(table.rows).forEach(remove);
-        }
+        e.target.value = validateValue(e.target.valueAsNumber);
+        removeValidation(table);
         
+            const column = e.target.parentElement,
+                  line = column.parentElement,
+                  columnIndex = +column.getAttribute(COLUMN_INDEX),
+                  lineIndex = +line.getAttribute(LINE_INDEX);
+            
         validateCell(
-                column,
-                [
-                 hasIn(e, puzzle[lineIndex]),
-                 hasIn(e, getColumn(puzzle, columnIndex)),
-                 hasIn(e, getPuzzleSection(puzzle, lineIndex, columnIndex))
-                ]
-        );
+            column,
+            hasInValues(
+                e,
+            [
+                puzzle[lineIndex],
+                getColumn(puzzle, columnIndex),
+                getPuzzleSection(puzzle, lineIndex, columnIndex)
+            ]));
         validateRow(line);
-        
-        callbackFn(e.target.valueAsNumber || 0);
-        // validateColumn(tbody, column.getAttribute(COLUMN_INDEX));
-      }
+
+            callbackFn(lineIndex, columnIndex, e.target.valueAsNumber || 0);
+            // validateColumn(tbody, column.getAttribute(COLUMN_INDEX));
+        }
+}
+
+export function removeValidation(table) {
+    Array.from(table.rows).forEach(remove);
+}
+
+function hasInValues(e, valuesArray) {
+    return valuesArray.map(array => hasIn(e, array));
+}
+
+function validateValue(value) {
+    value = value || '';
+    return value > MAX_SUDOKU_VALUE ? MAX_SUDOKU_VALUE : value < MIN_SUDOKU_VALUE ? '' : value;
 }
 
 function validateCell(column, checks) {
@@ -54,7 +66,7 @@ function hasIn(e, values) {
 function hasDuplicate(values) {
     values = values.filter(Boolean).sort();
     for(let i=0; i < values.length; i++) {
-        if(values[i] === values[i+1]) return true; 
+        if(values[i] === values[i+1]) return true;
     }
     return false;
 }

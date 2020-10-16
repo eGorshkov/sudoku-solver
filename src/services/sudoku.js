@@ -1,25 +1,26 @@
 import * as helper from '../helpers/index.js';
-import { createCell } from '../components/cell.js';
-import { validate } from './validation.js';
+import { removeValidation, validate } from './validation.js';
+import { createTable } from '../components/table.js';
+
 /**
- * 
- * @param {HTMLTableSectionElement} tableElement 
+ *
+ * @param {HTMLTableSectionElement} tableElement
  * @param {number[][]} puzzle
  */
 export function create(tableElement, puzzle) {
-  puzzle.forEach((line, lineIndex) => {
-    const tr = document.createElement('tr'),
-          composeFn = helper.compose(tr.appendChild.bind(tr), createCell);
+  createTable(
+    tableElement,
+    puzzle,
+    {
+      input: validate(puzzle, tableElement, setValue),
+      focus: validate(puzzle, tableElement, setValue),
+      blur: removeValidation.bind(null, tableElement),
+    }
+  );
+};
 
-    tr.setAttribute(helper.constans.LINE_INDEX, lineIndex);
-    line.forEach((column, columnIndex) => composeFn(
-      column,
-      columnIndex,
-      validate(puzzle, tableElement, (value) => puzzle[lineIndex][columnIndex] = value)
-      )
-    );
-    tableElement.appendChild(tr);
-  });
+function setValue(puzzle) {
+  return (lineIndex, columnIndex, value) => puzzle[lineIndex][columnIndex] = value;
 }
 
 export function solve(puzzle) {

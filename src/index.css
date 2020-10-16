@@ -1,3 +1,10 @@
+:root {
+    --section-color: coral;
+    --invalid-color: tomato;
+    --disabled-color: lightgrey;
+    --focus-color: aqua;
+}
+
 body {
     width: 100vw;
     height: 100vh;
@@ -5,18 +12,39 @@ body {
 }
 
 .sudoku__container {
-
+    height: inherit;
+    width: inherit;
+    display: grid;
+    place-content: center;
+    background-color: ghostwhite;
 }
 
 .sudoku__table {
-    width: 100%;
+    width: inherit;
      text-align: center;
+     border-collapse: collapse;
+     max-width: 800px;
 }
 
 .sudoku__table > tbody > tr > td {
-    height: 30px;
+    height: 50px;
     border: 1px solid;
     padding: 0;
+}
+
+.sudoku__table tr:first-child > td {
+    border-top: 3px solid var(--section-color, red);
+}
+.sudoku__table tr:nth-child(3n) > td {
+    border-bottom: 3px solid var(--section-color, red);
+}
+
+.sudoku__table tr > td:nth-child(3n) {
+    border-right: 3px solid var(--section-color, red);
+}
+
+.sudoku__table tr > td:first-child {
+    border-left: 3px solid var(--section-color, red);
 }
 
 .sudoku__table > tbody > tr > td > input {
@@ -29,13 +57,13 @@ body {
 }
 
 .sudoku__table > tbody > tr > td > input:disabled {
-    opacity: 0.5;
+    background-color: var(--disabled-color, grey);
 }
 
-.sudoku__table tr[invalid] > td:not([invalid]) {
-    background-color: hsl(9 100% 64% / .5);
+.sudoku__table tr[invalid] > td:not([invalid]) > input {
+    background-color: hsla(9, 100%, 64%, .5);
 }
 
 .sudoku__table td[invalid] {
-    background-color: tomato;
+    background-color: var(--invalid-color, red);
 }
