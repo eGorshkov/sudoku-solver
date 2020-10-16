@@ -11,8 +11,13 @@ window.onload = () => {
     }
     return puzzle.some(line => line.includes(0)) ? sudoku(puzzle) : puzzle;
   }
-
-  // Получить наиболее вероятное число
+  /**
+   * Получение единственного невыбранного числа
+   * @param puzzle
+   * @param lineIndex
+   * @param columnIndex
+   * @returns {number}
+   */
   function getProbableValue(puzzle, lineIndex, columnIndex) {
     const probableValues = SUDOKU_VALUES.filter(
       probable(puzzle[lineIndex], getColumn(puzzle, columnIndex), getPuzzleSection(puzzle, lineIndex, columnIndex))
@@ -25,7 +30,6 @@ window.onload = () => {
 
     return probableValues.length > 1 ? 0 : probableValues[0];
   }
-
   /**
    * Фильтрация невыбранных значений
    * @param {number[]} line
@@ -67,7 +71,7 @@ window.onload = () => {
     return Math.max(0, Math.ceil((index + 1) / SUDOKU_SECTION_DIVIDER) - 1) * SUDOKU_SECTION_DIVIDER;
   }
 
-  const sudokuValue = sudoku([
+  sudoku([
     [5, 3, 0, 0, 7, 0, 0, 0, 0],
     [6, 0, 0, 1, 9, 5, 0, 0, 0],
     [0, 9, 8, 0, 0, 0, 0, 6, 0],
@@ -78,21 +82,4 @@ window.onload = () => {
     [0, 0, 0, 4, 1, 9, 0, 0, 5],
     [0, 0, 0, 0, 8, 0, 0, 7, 9]
   ]);
-
-  console.log(
-    '---',
-    'sudoku result',
-    JSON.stringify(sudokuValue) ===
-      JSON.stringify([
-        [5, 3, 4, 6, 7, 8, 9, 1, 2],
-        [6, 7, 2, 1, 9, 5, 3, 4, 8],
-        [1, 9, 8, 3, 4, 2, 5, 6, 7],
-        [8, 5, 9, 7, 6, 1, 4, 2, 3],
-        [4, 2, 6, 8, 5, 3, 7, 9, 1],
-        [7, 1, 3, 9, 2, 4, 8, 5, 6],
-        [9, 6, 1, 5, 3, 7, 2, 8, 4],
-        [2, 8, 7, 4, 1, 9, 6, 3, 5],
-        [3, 4, 5, 2, 8, 6, 1, 7, 9]
-      ])
-  );
 };
