@@ -16,14 +16,14 @@ window.onload = () => {
   const buttons = document.getElementById('sudoku-buttons');
   const text = document.getElementById('sudoku-text');
 
-  mode._focusedChange.next((focused) => {
+  mode._focusedChange.subscribe(focused => {
     console.log('_focusedChange value: ', mode._focusedChange.getValue());
     buttons.querySelector('#check-unselected-button').disabled = !focused;
   });
 
-  mode._textChange.next((value) => {
+  mode._textChange.subscribe(value => {
     console.log('_textChange value: ', mode._textChange.getValue());
-    text.innerText = value
+    text.innerText = value;
   });
 
   mode.create(table, sudokuPuzzle);

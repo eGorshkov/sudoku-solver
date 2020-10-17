@@ -26,6 +26,7 @@ export function validate(puzzle, table, callbackFn) {
       ])
     );
     validateRow(line);
+    validateColumn(table, columnIndex);
 
     callbackFn = Array.isArray(callbackFn) ? callbackFn : [callbackFn];
     callbackFn.forEach(fn => fn(lineIndex, columnIndex, e.target.valueAsNumber || 0));
@@ -51,14 +52,26 @@ function validateCell(column, checks) {
 }
 
 function validateRow(line) {
-  checkInvalid(
-    line,
-    Array.from(line.children).some(cell => cell.hasAttribute('invalid'))
-  );
+  checkInvalid(line, hasInvalidCell(Array.from(line.children)));
 }
 
+/**
+ *
+ * @param {HTMLTableSectionElement} table
+ * @param {number} columnIndex
+ */
 function validateColumn(table, columnIndex) {
-  checkInvalid();
+  const column = Array.from(table.rows).map(row => row.children[columnIndex]);
+  const isInvalid = hasInvalidCell(column);
+  if (isInvalid) {
+    column.forEach(cell => checkInvalid(cell, true));
+  }
+  debugger;
+  // checkInvalid();
+}
+
+function hasInvalidCell(array) {
+  return array.some(cell => cell.hasAttribute('invalid'));
 }
 
 function hasIn(e, values) {
@@ -86,7 +99,7 @@ function remove(element) {
  * @param {boolean} value
  * @param {string} className?
  */
-function checkInvalid(element, value, className) {
+function checkInvalid(element, value, className = null) {
   value ? element.setAttribute('invalid', '') : element.removeAttribute('invalid');
   if (className) {
     value ? element.classList.add(className) : element.classList.remove(className);

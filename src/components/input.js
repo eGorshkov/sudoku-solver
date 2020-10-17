@@ -14,11 +14,11 @@ export function createInput(value, callbackFn) {
   input.min = MIN_SUDOKU_VALUE;
 
   if (callbackFn) {
-    Object.keys(callbackFn).forEach(type => {
+    for (let type in callbackFn) {
       Array.isArray(callbackFn[type])
         ? callbackFn[type].forEach(cb => input.addEventListener(type, cb))
-        : input.addEventListener(type, callbackFn[type])
-    })
+        : input.addEventListener(type, callbackFn[type]);
+    }
   }
 
   return input;

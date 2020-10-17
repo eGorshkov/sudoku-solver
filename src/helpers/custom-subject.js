@@ -1,17 +1,16 @@
 // export class Subject {
 //   value = null;
-//   nextFunctions = [];
+//   subscribeFunctions = [];
 //   constructor(v) {
-//     this.subscribe(v);
+//     this.next(v);
 //   }
-//   next(cb) {
-//     this.nextFunctions.push(cb);
-//     cb(this.value);
+//   subscribe(cb) {
+//     this.subscribeFunctions.push(cb);
 //     return this;
 //   }
-//   subscribe(v) {
+//   next(v) {
 //     this.value = v;
-//     this.nextFunctions.forEach(cb => cb(v));
+//     this.subscribeFunctions.forEach(cb => cb(v));
 //   }
 //   getValue() {
 //     return this.value;
@@ -22,26 +21,26 @@
 // }
 
 export function Subject(v) {
-  this.nextFunctions = [];
+  this.subscribeFunctions = [];
   this.value = null;
-  this.subscribe(v);
+  this.next(v);
   return this;
 }
 
-Subject.prototype.next = function(cb) {
-  this.nextFunctions.push(cb);
+Subject.prototype.subscribe = function (cb) {
+  this.subscribeFunctions.push(cb);
   cb(this.value);
 };
 
-Subject.prototype.subscribe = function(v) {
+Subject.prototype.next = function (v) {
   this.value = v;
-  this.nextFunctions.forEach(cb => cb(v));
+  this.subscribeFunctions.forEach(cb => cb(v));
 };
 
-Subject.prototype.bind = function(v) {
-  return this.subscribe.bind(this, v)
+Subject.prototype.bind = function (v) {
+  return this.next.bind(this, v);
 };
 
-Subject.prototype.getValue = function() {
+Subject.prototype.getValue = function () {
   return this.value;
 };

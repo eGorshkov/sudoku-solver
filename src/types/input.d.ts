@@ -4,5 +4,5 @@ export interface IInputCallback {
   blur: (...args) => Function | Array<(...args) => Function>;
 }
 export interface IInput {
-  callbackFn: IInputCallback
+  callbackFn: IInputCallback;
 }

@@ -14,16 +14,8 @@ export const _textChange = new Subject('initial');
 export function create(tableElement, puzzle) {
   createTable(tableElement, puzzle, {
     input: validate(puzzle, tableElement, setValue(puzzle)),
-    focus: validate(puzzle, tableElement, [
-      setValue(puzzle),
-      _focusedChange.bind(true),
-      _textChange.bind( 'focused')
-    ]),
-    blur: [
-      removeValidation.bind(null, tableElement),
-      _focusedChange.bind( false),
-      _textChange.bind( 'blured')
-    ]
+    focus: validate(puzzle, tableElement, [setValue(puzzle), _focusedChange.bind(true), _textChange.bind('focused')]),
+    blur: [removeValidation.bind(null, tableElement), _focusedChange.bind(false), _textChange.bind('blured')]
   });
 }
 
